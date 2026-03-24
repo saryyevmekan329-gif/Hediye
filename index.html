@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beni Seviyor Musun?</title>
+    <style>
+        :root {
+            --bg-color: #f5f5dc; /* Bej arkaplan */
+            --card-red: #b22222;
+            --heart-gold: #d4af37;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        /* Kart Tasarımı */
+        .envelope {
+            width: 300px;
+            height: 200px;
+            background-color: var(--card-red);
+            position: relative;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.5s;
+        }
+
+        .envelope:hover {
+            transform: scale(1.05);
+        }
+
+        /* Mühür/Pul */
+        .seal {
+            width: 50px;
+            height: 50px;
+            background-color: var(--heart-gold);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+
+        /* Soru Ekranı (Başlangıçta Gizli) */
+        #question-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 { color: var(--card-red); margin-bottom: 30px; }
+
+        .btn-container {
+            display: flex;
+            gap: 20px;
+            position: relative;
+            height: 100px;
+            width: 300px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        #yes-btn { background-color: #4CAF50; color: white; }
+        #no-btn { 
+            background-color: var(--card-red); 
+            color: white; 
+            position: absolute;
+        }
+
+        /* Kutlama Ekranı */
+        #celebration {
+            display: none;
+            font-size: 24px;
+            color: #d63384;
+        }
+
+        .bear-img { width: 150px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <div id="envelope-container" class="envelope" onclick="openCard()">
+        <div class="seal">❤️</div>
+    </div>
+
+    <div id="question-screen">
+        <h1>Beni seviyor musun?</h1>
+        <div class="btn-container">
+            <button id="yes-btn" onclick="celebrate()">EVET</button>
+            <button id="no-btn" onmouseover="moveNoButton()" onclick="moveNoButton()">HAYIR</button>
+        </div>
+    </div>
+
+    <div id="celebration">
+        <p>Oleeey! ❤️</p>
+        <p>Biliyordum! ✨</p>
+        <div style="font-size: 60px;">🧸🧸🧸</div>
+    </div>
+
+    <script>
+        // Kartı Açma
+        function openCard() {
+            document.getElementById('envelope-container').style.display = 'none';
+            document.getElementById('question-screen').style.display = 'flex';
+        }
+
+        // Hayır Butonunu Kaçırma
+        let noScale = 1;
+        function moveNoButton() {
+            const btn = document.getElementById('no-btn');
+            
+            // Rastgele konum
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            
+            // Küçültme
+            noScale -= 0.1;
+            if (noScale < 0.2) noScale = 0.2;
+
+            btn.style.position = 'fixed';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+            btn.style.transform = `scale(${noScale})`;
+        }
+
+        // Evet Kutlaması
+        function celebrate() {
+            document.getElementById('question-screen').style.display = 'none';
+            document.getElementById('celebration').style.display = 'block';
+            
+            // Konfeti efekti simülasyonu
+            for(let i=0; i<50; i++) {
+                createHeart();
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.style.position = 'fixed';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '100vh';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            heart.style.transition = 'all 3s linear';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.style.top = '-10vh';
+                heart.style.opacity = '0';
+            }, 100);
+            
+            setTimeout(() => heart.remove(), 3000);
+        }
+    </script>
+</body>
+</html>
