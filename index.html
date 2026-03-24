@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sana Bir Sürprizim Var ❤️</title>
+    <style>
+        :root {
+            --bg-color: #fffaf0;
+            --card-red: #e63946;
+            --heart-gold: #ffb703;
+            --text-color: #2b2d42;
+        }
+
+        body {
+            background: linear-gradient(135deg, #fffaf0 0%, #ffe4e1 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
+            color: var(--text-color);
+        }
+
+        /* Zarf Tasarımı */
+        .envelope {
+            width: 320px;
+            height: 220px;
+            background-color: var(--card-red);
+            position: relative;
+            cursor: pointer;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            transition: all 0.5s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .seal {
+            width: 60px;
+            height: 60px;
+            background-color: var(--heart-gold);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Soru Ekranı (Başlangıçta Gizli) */
+        #question-screen {
